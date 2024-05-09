@@ -3,7 +3,7 @@ import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
 import { useLoading } from "../hooks/useLoading";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const firebaseAuth = useFirebaseAuth(null);
