@@ -49,9 +49,11 @@ export function NavBar() {
             <li>
               <a>Need Volunteer</a>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
+            {loading ? null : user ? null : (
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            )}
             <li>
               <Link to="/register">Register</Link>
             </li>
@@ -74,9 +76,11 @@ export function NavBar() {
           <li>
             <a>Need Volunteer</a>
           </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
+          {loading ? null : user ? null : (
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          )}
           <li>
             <Link to="/register">Register</Link>
           </li>
