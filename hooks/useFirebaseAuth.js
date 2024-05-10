@@ -5,7 +5,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  GithubAuthProvider,
+  FacebookAuthProvider,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -32,10 +32,6 @@ export function useFirebaseAuth(initialUser = null) {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   }
-  function loginWithGithub() {
-    const provider = new GithubAuthProvider();
-    return signInWithPopup(auth, provider);
-  }
   function logOut() {
     return signOut(auth);
   }
@@ -46,7 +42,6 @@ export function useFirebaseAuth(initialUser = null) {
     loginWithEmailAndPassword,
     updateUserProfile,
     loginWithGoogle,
-    loginWithGithub,
     logOut,
   };
 }
