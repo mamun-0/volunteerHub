@@ -5,13 +5,10 @@ import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
 import { toast } from "react-toastify";
+import axios from "axios";
 export function Login() {
   const {
-    firebaseAuth: {
-      loginWithEmailAndPassword,
-      setUser,
-      loginWithGoogle,
-    },
+    firebaseAuth: { loginWithEmailAndPassword, setUser, loginWithGoogle },
   } = useProvideAuth();
   const {
     register,
@@ -24,9 +21,20 @@ export function Login() {
     const { email, password } = data;
     loginWithEmailAndPassword(email, password)
       .then((res) => {
-        setUser(res);
-        toast.success("Successfully loggedIn 😀");
-        reset();
+        axios
+          .post(
+            `${import.meta.env.VITE_BASE_URL}/jwt`,
+            {
+              email: res?.user?.email,
+            },
+            { withCredentials: true }
+          )
+          .then((postSuccces) => {
+            console.log(postSuccces);
+            toast.success("Successfully loggedIn 😀");
+            setUser(res);
+            reset();
+          });
       })
       .catch(() => {
         toast.error("Invalid username or password!");
@@ -35,8 +43,19 @@ export function Login() {
   function socialLogin(callback) {
     callback()
       .then((res) => {
-        setUser(res);
-        toast.success("Successfully loggedIn 😀");
+        axios
+          .post(
+            `${import.meta.env.VITE_BASE_URL}/jwt`,
+            {
+              email: res?.user?.email,
+            },
+            { withCredentials: true }
+          )
+          .then((postSuccces) => {
+            console.log(postSuccces);
+            toast.success("Successfully loggedIn 😀");
+            setUser(res);
+          });
       })
       .catch(() => {
         toast.error("Something went worng. Try Again!");

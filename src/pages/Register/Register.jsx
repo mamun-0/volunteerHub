@@ -27,9 +27,19 @@ export function Register() {
     signUpWithEmailAndPassword(email, password)
       .then((res) => {
         updateUserProfile(displayName, photoURL).then((finalRes) => {
-          setUser(finalRes);
-          toast.success("Successfully Registered 😀");
-          reset();
+          axios
+            .post(
+              `${import.meta.env.VITE_BASE_URL}/jwt`,
+              {
+                email: res?.user?.email,
+              },
+              { withCredentials: true }
+            )
+            .then(() => {
+              toast.success("Successfully Registered 😀");
+              setUser(finalRes);
+              reset();
+            });
         });
       })
       .catch(() => {
@@ -38,9 +48,22 @@ export function Register() {
   }
 
   function socialLogin(callback) {
-    callback().then((res) => {
-      setUser(res);
-    });
+    callback()
+      .then((res) => {
+        axios
+          .post(
+            `${import.meta.env.VITE_BASE_URL}/jwt`,
+            {
+              email: res?.user?.email,
+            },
+            { withCredentials: true }
+          )
+          .then(() => {
+            toast.success("Successfully loggedIn 😀");
+            setUser(res);
+          });
+      })
+      .catch(() => {});
   }
   return (
     <div className="h-[90vh] flex flex-col justify-center items-center">
