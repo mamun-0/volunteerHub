@@ -44,10 +44,10 @@ export function NavBar() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a>Need Volunteer</a>
+              <Link to="/need-volunteer">Need Volunteer</Link>
             </li>
             {loading ? null : user ? null : (
               <li>
@@ -71,10 +71,10 @@ export function NavBar() {
       <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+          <Link to="/">Home</Link>
           </li>
           <li>
-            <a>Need Volunteer</a>
+          <Link to="/need-volunteer">Need Volunteer</Link>
           </li>
           {loading ? null : user ? null : (
             <li>
@@ -131,7 +131,9 @@ export function NavBar() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a className="justify-between">Add Volunteer</a>
+              <Link to="/add-volunteer" className="justify-between">
+                Add Volunteer
+              </Link>
             </li>
             <li>
               <a>Manage Post</a>
