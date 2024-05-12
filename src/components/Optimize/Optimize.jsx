@@ -1,6 +1,6 @@
 export function Optimize() {
   return (
-    <div className="flex">
+    <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row items-center">
       <div className="w-1/2">
         <img className="w-full" src="/images/second-section.webp" alt="" />
       </div>
