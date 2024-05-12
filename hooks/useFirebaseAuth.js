@@ -5,10 +5,10 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  FacebookAuthProvider,
   signOut,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 export function useFirebaseAuth(initialUser = null) {
   const [user, setInitialUser] = useState(initialUser);
@@ -33,6 +33,9 @@ export function useFirebaseAuth(initialUser = null) {
     return signInWithPopup(auth, provider);
   }
   function logOut() {
+    axios.get(`${import.meta.env.VITE_BASE_URL}/logout`, {
+      withCredentials: true,
+    });
     return signOut(auth);
   }
   return {
