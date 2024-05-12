@@ -128,19 +128,22 @@ export function AddVolunteerForm() {
           </FormGroup>
           <FormGroup errorMessage={errors?.num_volunteer?.message}>
             <label id="num_volunteer">No. of volunteers :</label>
-            <select
+            <input
+              type="number"
+              htmlFor="num_volunteer"
+              placeholder="no. of volunteers"
+              className="input input-bordered w-full"
               {...register("num_volunteer", {
-                required: true,
-                message: "Selection required",
+                required: { value: true, message: "Required" },
+                validate: {
+                  positive: (v) => {
+                    if (parseInt(v) <= 0) {
+                      return "Must grater than 0";
+                    }
+                  },
+                },
               })}
-              className="select select-bordered w-full"
-            >
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+            />
           </FormGroup>
           <FormGroup errorMessage={errors?.date?.message}>
             <label htmlFor="date">Date:</label>
