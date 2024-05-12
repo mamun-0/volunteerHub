@@ -4,6 +4,8 @@ import { Login } from "./src/pages/Login/Login";
 import { Register } from "./src/pages/Register/Register";
 import { Error404 } from "./src/pages/Error/Error404";
 import { Home } from "./src/pages/Home/Home";
+import { AddVolunteer } from "./src/pages/AddVolunteer/AddVolunteer";
+import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 export const router = createBrowserRouter([
   {
     element: <Main />,
@@ -12,6 +14,14 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      {
+        path: "/add-volunteer",
+        element: (
+          <ProtectedRoute>
+            <AddVolunteer />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
