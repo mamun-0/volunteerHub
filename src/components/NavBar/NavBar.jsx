@@ -71,10 +71,10 @@ export function NavBar() {
       <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-          <Link to="/">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-          <Link to="/need-volunteer">Need Volunteer</Link>
+            <Link to="/need-volunteer">Need Volunteer</Link>
           </li>
           {loading ? null : user ? null : (
             <li>
@@ -136,7 +136,7 @@ export function NavBar() {
               </Link>
             </li>
             <li>
-              <a>Manage Post</a>
+              <Link to={"/manage-post"}>Manage My Post</Link>
             </li>
             <li>
               <a>Volunteer Request</a>
