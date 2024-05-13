@@ -9,12 +9,21 @@ import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 import { VolunteerDetails } from "./src/pages/VolunteerDetails/VolunteerDetails";
 import { NeedVolunteer } from "./src/pages/NeedVolunteer/NeedVolunteer";
 import { BeAVolunteer } from "./src/pages/BeAVolunteer/BeAVolunteer";
+import { ManageMyPost } from "./src/pages/ManageMyPost/ManageMyPost";
 export const router = createBrowserRouter([
   {
     element: <Main />,
     errorElement: <Error404 />,
     children: [
       { path: "/", element: <Home /> },
+      {
+        path: "/manage-post",
+        element: (
+          <ProtectedRoute>
+            <ManageMyPost />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: "/be-a-volunteer/:id",
         element: (
