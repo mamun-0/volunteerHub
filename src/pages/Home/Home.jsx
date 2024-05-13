@@ -6,6 +6,7 @@ import { TrustedORG } from "../../components/TrustedORG/TrustedORG";
 import axios from "axios";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 import { UpcomingDateLine } from "../../components/UpcomingDeadLine/UpcomingDateLine";
+import { Link } from "react-router-dom";
 export function Home() {
   const [deadLine, setDeadLine] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,9 @@ export function Home() {
             return <UpcomingDateLine key={idx} {...person} />;
           })
         )}
+        <div className="col-span-3 flex justify-center">
+        <Link className="btn btn-warning" to="/need-volunteer">See All</Link>
+        </div>
       </div>
       <SectionTitle title={"Customizable for Each Initiative"} size={3} />
       <Optimize />
