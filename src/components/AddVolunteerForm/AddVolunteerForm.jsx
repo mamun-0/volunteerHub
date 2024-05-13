@@ -57,7 +57,7 @@ export function AddVolunteerForm() {
             <input
               htmlFor="post_title"
               type="text"
-              placeholder="Item Name"
+              placeholder="Post Title"
               {...register("post_title", {
                 required: { value: true, message: "Required" },
               })}
