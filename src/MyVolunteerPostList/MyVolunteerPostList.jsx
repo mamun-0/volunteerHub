@@ -13,6 +13,7 @@ export function MyVolunteerPostList({ myPosts, setMyPosts }) {
               <th>Post Title</th>
               <th>Category</th>
               <th>Location</th>
+              <th>Post Details</th>
               <th>Update Post</th>
               <th>Delete Post</th>
             </tr>
@@ -31,7 +32,20 @@ export function MyVolunteerPostList({ myPosts, setMyPosts }) {
                   <td>{category}</td>
                   <td>{location}</td>
                   <td>
-                    <button className="btn btn-sm btn-warning">Update</button>
+                    <Link
+                      to={`/need-volunteer/${_id}`}
+                      className="btn btn-sm btn-outline"
+                    >
+                      Details
+                    </Link>
+                  </td>
+                  <td>
+                    <Link
+                      to={`/manage-post/${_id}`}
+                      className="btn btn-sm btn-warning"
+                    >
+                      Update
+                    </Link>
                   </td>
                   <td>
                     <DeleteModal setMyPosts={setMyPosts} id={_id} />
