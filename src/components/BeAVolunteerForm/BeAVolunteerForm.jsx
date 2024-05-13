@@ -250,7 +250,7 @@ export function BeAVolunteerForm({
             </select>
           </FormGroup>
         </div>
-        <button className="btn btn-primary mt-4">Request👏</button>
+        <button className="btn btn-primary mt-4">Request</button>
       </form>
     </div>
   );
