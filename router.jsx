@@ -10,6 +10,7 @@ import { VolunteerDetails } from "./src/pages/VolunteerDetails/VolunteerDetails"
 import { NeedVolunteer } from "./src/pages/NeedVolunteer/NeedVolunteer";
 import { BeAVolunteer } from "./src/pages/BeAVolunteer/BeAVolunteer";
 import { ManageMyPost } from "./src/pages/ManageMyPost/ManageMyPost";
+import { UpdateMyPost } from "./src/pages/UpdateMyPost/UpdateMyPost";
 export const router = createBrowserRouter([
   {
     element: <Main />,
@@ -18,11 +19,27 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       {
         path: "/manage-post",
-        element: (
-          <ProtectedRoute>
-            <ManageMyPost />
-          </ProtectedRoute>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <ProtectedRoute>
+                <ManageMyPost />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: ":id",
+            element: (
+              <ProtectedRoute>
+                <UpdateMyPost />
+              </ProtectedRoute>
+            ),
+            loader: ({ params }) => {
+              return params.id;
+            },
+          },
+        ],
       },
       {
         path: "/be-a-volunteer/:id",
