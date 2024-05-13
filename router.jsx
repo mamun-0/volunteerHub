@@ -8,6 +8,7 @@ import { AddVolunteer } from "./src/pages/AddVolunteer/AddVolunteer";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 import { VolunteerDetails } from "./src/pages/VolunteerDetails/VolunteerDetails";
 import { NeedVolunteer } from "./src/pages/NeedVolunteer/NeedVolunteer";
+import { BeAVolunteer } from "./src/pages/BeAVolunteer/BeAVolunteer";
 export const router = createBrowserRouter([
   {
     element: <Main />,
@@ -15,12 +16,34 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       {
+        path: "/be-a-volunteer/:id",
+        element: (
+          <ProtectedRoute>
+            <BeAVolunteer />
+          </ProtectedRoute>
+        ),
+        loader: ({ params }) => {
+          return params.id;
+        },
+      },
+      {
         path: "/need-volunteer",
         children: [
-          { index: true, element: <NeedVolunteer /> },
+          {
+            index: true,
+            element: (
+              <ProtectedRoute>
+                <NeedVolunteer />
+              </ProtectedRoute>
+            ),
+          },
           {
             path: ":id",
-            element: <VolunteerDetails />,
+            element: (
+              <ProtectedRoute>
+                <VolunteerDetails />
+              </ProtectedRoute>
+            ),
             loader: ({ params }) => {
               return params.id;
             },
