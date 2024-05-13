@@ -21,7 +21,6 @@ export function Home() {
   return (
     <div>
       <Banner />
-      <SectionTitle title={"Volunteer Needs Now"} size={3} />
       <SectionTitle
         title={
           "Volunteer Management software trusted by thousands of organizations, including : "
