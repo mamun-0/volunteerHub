@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function VolunteerDetailsCard({
   thumbnail_url,
   post_title,
@@ -8,6 +10,7 @@ export function VolunteerDetailsCard({
   org_email,
   location,
   description,
+  _id
 }) {
   const originalDate = new Date(date);
   const formattedDate = originalDate.toLocaleDateString("en-GB");
@@ -34,9 +37,10 @@ export function VolunteerDetailsCard({
         <h2 className="p-2 text-lg border-b-2">
           Organization Name : {org_name}
         </h2>
-        <h2 className="p-2 text-lg border-b-2">
+        <h2 className="p-2 text-lg">
           Organization Email : {org_email}
         </h2>
+        <Link to={`/be-a-volunteer/${_id}`} className="btn btn-primary w-full text-lg">Be a Volunteer</Link>
       </div>
     </div>
   );
