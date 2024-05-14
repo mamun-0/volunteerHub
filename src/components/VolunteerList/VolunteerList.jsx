@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { VolunteerCard } from "../VolunteerCard/VolunteerCard";
 import axios from "axios";
 import { LoadingSpin } from "../LoadingSpin/LoadingSpin";
+import { IoGridOutline } from "react-icons/io5";
+import { BsViewStacked } from "react-icons/bs";
+import { useToggle } from "../../../hooks/useToggle";
+import { VolunteerCardTable } from "../VolunteerCardTable/VolunteerCardTable";
 
 export function VolunteerList() {
   const [volunteer, setVolunteer] = useState(null);
   const [filterd, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState("");
+  const [toggle, setToggle] = useToggle(true);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BASE_URL}/need-volunteer`, {
@@ -33,7 +38,7 @@ export function VolunteerList() {
   return (
     <>
       <div className="text-center dark:bg-black">
-        <div className="w-2/5 inline-block">
+        <div className="flex justify-center items-center space-x-4">
           <label className="input input-bordered flex items-center gap-2">
             <input
               type="text"
@@ -55,19 +60,53 @@ export function VolunteerList() {
               />
             </svg>
           </label>
+          <div
+            className="text-3xl cursor-pointer"
+            onClick={() => {
+              setToggle();
+            }}
+          >
+            {toggle ? <IoGridOutline /> : <BsViewStacked />}
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-content-center py-4 dark:bg-black">
-        {loading ? (
+      <div
+        className={`${
+          toggle
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-content-center"
+            : ""
+        } py-4 dark:bg-black`}
+      >
+        {/* {loading ? (
           <LoadingSpin />
-        ) : filterd.length ? (
+        ) : toggle && filterd.length ? (
           filterd.map((person, idx) => {
             return <VolunteerCard key={idx} {...person} />;
           })
-        ) : volunteer ? (
+        ) : volunteer && toggle ? (
           volunteer.map((person, idx) => {
             return <VolunteerCard key={idx} {...person} />;
           })
+        ) : volunteer && !toggle ? (
+          <VolunteerCardTable myPosts={volunteer} />
+        ) : (
+          "Empty List"
+        )} */}
+        {loading ? (
+          <LoadingSpin />
+        ) : toggle && filterd.length ? (
+          filterd.map((person, idx) => {
+            return <VolunteerCard key={idx} {...person} />;
+          })
+        ) : !toggle && filterd.length ? (
+          // Here is the problem next time i try to fix it😿.
+          <VolunteerCardTable myPosts={volunteer} />
+        ) : volunteer && toggle ? (
+          volunteer.map((person, idx) => {
+            return <VolunteerCard key={idx} {...person} />;
+          })
+        ) : volunteer && !toggle ? (
+          <VolunteerCardTable myPosts={volunteer} />
         ) : (
           "Empty List"
         )}
