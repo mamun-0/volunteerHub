@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function VolunteerDetailsCard({
   thumbnail_url,
@@ -10,7 +11,7 @@ export function VolunteerDetailsCard({
   org_email,
   location,
   description,
-  _id
+  _id,
 }) {
   const originalDate = new Date(date);
   const formattedDate = originalDate.toLocaleDateString("en-GB");
@@ -31,16 +32,31 @@ export function VolunteerDetailsCard({
         </h2>
         <h2 className="p-2 text-lg border-b-2">Location: {location}</h2>
         <h2 className="p-2 text-lg border-b-2">
-          <span className="text-red-600">Deadline:</span> {formattedDate || "Not found"}
+          <span className="text-red-600">Deadline:</span>{" "}
+          {formattedDate || "Not found"}
         </h2>
         <p className="p-2 text-lg border-b-2">Description : {description}</p>
         <h2 className="p-2 text-lg border-b-2">
           Organization Name : {org_name}
         </h2>
-        <h2 className="p-2 text-lg">
-          Organization Email : {org_email}
-        </h2>
-        <Link to={`/be-a-volunteer/${_id}`} className="btn btn-primary w-full text-lg">Be a Volunteer</Link>
+        <h2 className="p-2 text-lg">Organization Email : {org_email}</h2>
+        {num_volunteer == 0 ? (
+          <button
+            onClick={() => {
+              toast.error("No more volunteer is accepted");
+            }}
+            className="btn btn-error w-full text-lg cursor-not-allowed"
+          >
+            Not to be a voluenteer🙏
+          </button>
+        ) : (
+          <Link
+            to={`/be-a-volunteer/${_id}`}
+            className="btn btn-primary w-full text-lg"
+          >
+            Be a Volunteer
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import { parseISO } from "date-fns";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export function BeAVolunteerForm({
   category,
   description,
@@ -250,7 +250,13 @@ export function BeAVolunteerForm({
             </select>
           </FormGroup>
         </div>
-        <button className="btn btn-primary mt-4">Request</button>
+        {num_volunteer == 0 ? (
+          <Link className="btn btn-error mt-4" disabled>
+            No More Request is Accepted
+          </Link>
+        ) : (
+          <button className="btn btn-primary mt-4">Request</button>
+        )}
       </form>
     </div>
   );
