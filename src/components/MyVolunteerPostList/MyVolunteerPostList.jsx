@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { DeleteModal } from "../components/DeleteModal/DeleteModal";
+import { DeleteModal } from "../DeleteModal/DeleteModal";
 
 export function MyVolunteerPostList({ myPosts, setMyPosts }) {
   return (
