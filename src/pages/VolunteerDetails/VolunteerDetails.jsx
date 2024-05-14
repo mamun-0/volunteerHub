@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 import { VolunteerDetailsCard } from "../../components/VolunteerDetailsCard/VolunteerDetailsCard";
 import { SectionTitle } from "../../components/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet";
 
 export function VolunteerDetails() {
   const [details, setDetails] = useState(null);
@@ -22,6 +23,9 @@ export function VolunteerDetails() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Volunteer Details</title>
+      </Helmet>
       <SectionTitle title={"Volunteer Need Post Details"} size={3} />
       {loading ? (
         <LoadingSpin />

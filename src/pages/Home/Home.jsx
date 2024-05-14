@@ -7,6 +7,7 @@ import axios from "axios";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 import { UpcomingDateLine } from "../../components/UpcomingDeadLine/UpcomingDateLine";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 export function Home() {
   const [deadLine, setDeadLine] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,9 @@ export function Home() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Banner />
       <SectionTitle
         title={

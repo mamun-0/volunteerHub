@@ -4,6 +4,7 @@ import axios from "axios";
 import { MyVolunteerPostList } from "../../components/MyVolunteerPostList/MyVolunteerPostList";
 import { BeAVolunteerPostList } from "../../components/BeAVolunteerPostList/BeAVolunteerPostList";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
+import { Helmet } from "react-helmet";
 
 export function ManageMyPost() {
   const [myPosts, setMyPosts] = useState([]);
@@ -40,6 +41,9 @@ export function ManageMyPost() {
   );
   return (
     <div>
+      <Helmet>
+        <title>Manage My Post</title>
+      </Helmet>
       <SectionTitle title={"My Need Volunteer Post"} size={3} />
       {loading ? (
         <LoadingSpin />

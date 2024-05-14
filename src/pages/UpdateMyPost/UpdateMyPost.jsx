@@ -4,6 +4,7 @@ import { UpdateMyPostForm } from "../../components/UpdateMyPostForm/UpdateMyPost
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
+import { Helmet } from "react-helmet";
 
 export function UpdateMyPost() {
   const [mypost, setMyPost] = useState(null);
@@ -21,6 +22,9 @@ export function UpdateMyPost() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Update My Post</title>
+      </Helmet>
       <SectionTitle title={"Update My Post"} size={3} />
       {loading ? <LoadingSpin /> : <UpdateMyPostForm {...mypost} />}
     </div>

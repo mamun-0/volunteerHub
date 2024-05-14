@@ -5,7 +5,7 @@ import axios from "axios";
 import { useLoaderData } from "react-router-dom";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
-
+import { Helmet } from "react-helmet";
 export function BeAVolunteer() {
   const {
     firebaseAuth: { user },
@@ -33,6 +33,9 @@ export function BeAVolunteer() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Be a Volunteer</title>
+      </Helmet>
       <SectionTitle title={"Be a Volunteer"} size={3} />
       {loading ? (
         <LoadingSpin />
