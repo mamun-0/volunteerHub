@@ -61,7 +61,7 @@ export function VolunteerList() {
             </svg>
           </label>
           <div
-            className="text-3xl cursor-pointer"
+            className="text-3xl cursor-pointer dark:text-white"
             onClick={() => {
               setToggle();
             }}
