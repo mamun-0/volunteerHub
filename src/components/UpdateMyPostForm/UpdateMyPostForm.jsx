@@ -189,7 +189,7 @@ export function UpdateMyPostForm({
             />
           </FormGroup>
         </div>
-        <button className="btn btn-primary mt-4">Update</button>
+        <button className="btn btn-primary mt-4">Update Post</button>
       </form>
     </div>
   );
