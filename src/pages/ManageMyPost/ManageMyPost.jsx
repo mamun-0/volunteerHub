@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { MyVolunteerPostList } from "../../MyVolunteerPostList/MyVolunteerPostList";
 import { SectionTitle } from "../../components/SectionTitle/SectionTitle";
 import axios from "axios";
+import { MyVolunteerPostList } from "../../components/MyVolunteerPostList/MyVolunteerPostList";
+import { BeAVolunteerPostList } from "../../components/BeAVolunteerPostList/BeAVolunteerPostList";
+import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 
 export function ManageMyPost() {
   const [myPosts, setMyPosts] = useState([]);
   const [beAVolunteer, setBeAVolunteer] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   useState(() => {
     axios
       .get(`${import.meta.env.VITE_BASE_URL}/myposts`, {
@@ -14,7 +18,10 @@ export function ManageMyPost() {
       .then(({ data }) => {
         setMyPosts(data.message);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        setLoading(false);
+      });
 
     axios
       .get(`${import.meta.env.VITE_BASE_URL}/request-voluenteer`, {
@@ -23,13 +30,35 @@ export function ManageMyPost() {
       .then(({ data }) => {
         setBeAVolunteer(data.message);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        setLoading2(false);
+      });
   }, []);
+  const EmptyListMsg = (
+    <h2 className="text-2xl text-center text-red-500 font-semibold my-3">Empty List</h2>
+  );
   return (
     <div>
       <SectionTitle title={"My Need Volunteer Post"} size={3} />
-      <MyVolunteerPostList myPosts={myPosts} setMyPosts={setMyPosts} />
+      {loading ? (
+        <LoadingSpin />
+      ) : !myPosts.length ? (
+        EmptyListMsg
+      ) : (
+        <MyVolunteerPostList myPosts={myPosts} setMyPosts={setMyPosts} />
+      )}
       <SectionTitle title={"My Volunteer Request Post"} size={3} />
+      {loading2 ? (
+        <LoadingSpin />
+      ) : !beAVolunteer.length ? (
+        EmptyListMsg
+      ) : (
+        <BeAVolunteerPostList
+          beAVolunteer={beAVolunteer}
+          setBeAVolunteer={setBeAVolunteer}
+        />
+      )}
     </div>
   );
 }
