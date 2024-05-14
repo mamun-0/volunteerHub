@@ -33,7 +33,7 @@ export function Home() {
       />
       <TrustedORG />
       <SectionTitle title={"Volunteer Needs Now"} size={3} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-3 dark:bg-black">
         {loading ? (
           <LoadingSpin />
         ) : (
@@ -42,7 +42,7 @@ export function Home() {
           })
         )}
         <div className="col-span-3 flex justify-center">
-        <Link className="btn btn-warning" to="/need-volunteer">See All</Link>
+        <Link className="btn btn-warning dark:text-slate-200 dark:btn-primary" to="/need-volunteer">See All</Link>
         </div>
       </div>
       <SectionTitle title={"Customizable for Each Initiative"} size={3} />

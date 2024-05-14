@@ -32,7 +32,7 @@ export function VolunteerList() {
 
   return (
     <>
-      <div className="text-center">
+      <div className="text-center dark:bg-black">
         <div className="w-2/5 inline-block">
           <label className="input input-bordered flex items-center gap-2">
             <input
@@ -57,7 +57,7 @@ export function VolunteerList() {
           </label>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-content-center my-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-content-center py-4 dark:bg-black">
         {loading ? (
           <LoadingSpin />
         ) : filterd.length ? (

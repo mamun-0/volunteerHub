@@ -29,8 +29,8 @@ export function CancelModal({ id, setBeAVolunteer }) {
       >
         Cancel
       </button>
-      <dialog id={`my_modal_${id}`} className="modal">
-        <div className="modal-box">
+      <dialog id={`my_modal_${id}`} className="modal dark:bg-black">
+        <div className="modal-box dark:bg-black dark:border-2">
           <h3 className="font-bold text-lg">
             Are You sure to cancel the volunteer request?🤔🤔!
           </h3>

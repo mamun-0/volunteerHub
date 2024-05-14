@@ -57,7 +57,7 @@ export function BeAVolunteerForm({
   }
 
   return (
-    <div className="mx-6 my-4">
+    <div className="mx-6 my-4 dark:mx-0 dark:my-0 dark:px-4 dark:bg-black dark:text-white">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormGroup errorMessage={errors?.post_title?.message}>
@@ -230,7 +230,7 @@ export function BeAVolunteerForm({
               {...register("volunteer_suggestion", {
                 required: { value: true, message: "Required" },
               })}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:text-black"
             />
           </FormGroup>
           <FormGroup errorMessage={errors?.status?.message}>
@@ -240,7 +240,7 @@ export function BeAVolunteerForm({
                 required: true,
                 message: "Selection required",
               })}
-              className="select select-bordered w-full"
+              className="select select-bordered w-full dark:text-black"
             >
               {["requested"].map((option) => (
                 <option key={option} value={option}>

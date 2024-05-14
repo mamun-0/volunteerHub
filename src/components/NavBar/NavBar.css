@@ -1,12 +1,12 @@
-.hiddenLogoutBtnParent{
-    position: relative;
+.hiddenLogoutBtnParent {
+  position: relative;
 }
-.hiddenLogoutBtn{
-    position: absolute;
-    display: none;
-    right: 2px;
-    bottom: -30px;
+.hiddenLogoutBtn {
+  position: absolute;
+  display: none;
+  right: 2px;
+  bottom: -30px;
 }
-.hiddenLogoutBtnParent:hover .hiddenLogoutBtn{
-    display: inline-block;
+.hiddenLogoutBtnParent:hover .hiddenLogoutBtn {
+  display: inline-block;
 }

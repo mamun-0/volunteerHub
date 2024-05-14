@@ -16,7 +16,7 @@ export function VolunteerDetailsCard({
   const originalDate = new Date(date);
   const formattedDate = originalDate.toLocaleDateString("en-GB");
   return (
-    <div className="flex flex-col items-center my-4">
+    <div className="flex flex-col items-center my-4 dark:my-0 dark:bg-black dark:py-3">
       <div className="w-1/2">
         <img
           className="h-[50vh] w-full object-cover"

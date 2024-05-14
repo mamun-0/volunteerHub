@@ -66,11 +66,11 @@ export function Register() {
       .catch(() => {});
   }
   return (
-    <div className="h-[90vh] flex flex-col justify-center items-center">
+    <div className="h-[90vh] flex flex-col justify-center items-center dark:bg-black">
       <Helmet>
         <title>Register</title>
       </Helmet>
-      <div className="md:w-1/3">
+      <div className="md:w-1/3 dark:border-2 dark:p-4">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <FormGroup errorMessage={errors?.displayName?.message}>
             <label className="input input-bordered flex items-center gap-2">
@@ -178,15 +178,15 @@ export function Register() {
               />
             </label>
           </FormGroup>
-          <button className="btn btn-outline w-full sm:w-auto">Register</button>
+          <button className="btn btn-outline w-full sm:w-auto dark:text-white">Register</button>
         </form>
         <div className="mt-3">
           <div className="flex justify-between">
-            <h2 className="text-violet-800 font-medium">
+            <h2 className="text-violet-800 font-medium dark:text-white">
               Already have an account?
             </h2>
-            <Link to="/login" className="font-medium">
-              👉Login
+            <Link to="/login" className="font-medium dark:text-white">
+              Login
             </Link>
           </div>
           <div className="mt-4 flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">

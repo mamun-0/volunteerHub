@@ -53,7 +53,7 @@ export function UpdateMyPostForm({
   }
 
   return (
-    <div className="mx-6 my-4">
+    <div className="mx-6 dark:mx-0 dark:px-6 my-4 dark:my-0 dark:py-4 dark:bg-black dark:text-white">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormGroup errorMessage={errors?.post_title?.message}>
@@ -65,7 +65,7 @@ export function UpdateMyPostForm({
               {...register("post_title", {
                 required: { value: true, message: "Required" },
               })}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:text-black"
             />
           </FormGroup>
           <FormGroup errorMessage={errors?.thumbnail_url?.message}>
@@ -82,7 +82,7 @@ export function UpdateMyPostForm({
                     "Absolute link starts with http or https and ends with .png, .jpg, jpeg, .gif, .bmp",
                 },
               })}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:text-black"
             />
           </FormGroup>
           <FormGroup errorMessage={errors?.description?.message}>
@@ -94,7 +94,7 @@ export function UpdateMyPostForm({
               id="description"
               cols="40"
               rows="6"
-              className="input input-bordered w-full rounded-md"
+              className="input input-bordered w-full rounded-md dark:text-black"
             />
           </FormGroup>
           <FormGroup errorMessage={errors?.category?.message}>
@@ -104,7 +104,7 @@ export function UpdateMyPostForm({
                 required: true,
                 message: "Selection required",
               })}
-              className="select select-bordered w-full"
+              className="select select-bordered w-full dark:text-black"
             >
               {[
                 "healthcare",
@@ -127,7 +127,7 @@ export function UpdateMyPostForm({
               {...register("location", {
                 required: { value: true, message: "Required" },
               })}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:text-black"
             />
           </FormGroup>
           <FormGroup errorMessage={errors?.num_volunteer?.message}>
@@ -136,7 +136,7 @@ export function UpdateMyPostForm({
               type="number"
               htmlFor="num_volunteer"
               placeholder="no. of volunteers"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:text-black"
               {...register("num_volunteer", {
                 required: { value: true, message: "Required" },
                 validate: {

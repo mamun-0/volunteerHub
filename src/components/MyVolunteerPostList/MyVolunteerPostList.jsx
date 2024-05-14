@@ -34,7 +34,7 @@ export function MyVolunteerPostList({ myPosts, setMyPosts }) {
                   <td>
                     <Link
                       to={`/need-volunteer/${_id}`}
-                      className="btn btn-sm btn-outline"
+                      className="btn btn-sm btn-outline dark:text-white"
                     >
                       Details
                     </Link>

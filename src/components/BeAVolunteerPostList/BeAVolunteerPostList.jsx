@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { DeleteModal } from "../DeleteModal/DeleteModal";
 import { CancelModal } from "../CancelModal/CancelModal";
 
 export function BeAVolunteerPostList({ beAVolunteer, setBeAVolunteer }) {

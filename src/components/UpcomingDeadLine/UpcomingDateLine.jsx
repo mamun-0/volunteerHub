@@ -28,7 +28,7 @@ export function UpcomingDateLine({
         <div className="text-right my-2">
           <Link
             to={`/need-volunteer/${_id}`}
-            className="btn btn-success btn-sm"
+            className="btn btn-success btn-sm dark:text-slate-200"
           >
             View Details
           </Link>

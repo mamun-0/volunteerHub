@@ -2,7 +2,7 @@ import Marquee from "react-fast-marquee";
 import "./TrustedORG.css";
 export function TrustedORG() {
   return (
-    <div className="image-space">
+    <div className="image-space dark:bg-black">
       <Marquee pauseOnHover={true}>
         <img src="/images/marquee/1.png" alt="" />
         <img src="/images/marquee/2.png" alt="" />

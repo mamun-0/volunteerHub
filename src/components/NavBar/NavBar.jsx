@@ -5,6 +5,8 @@ import "./NavBar.css";
 import { LoadingSpin } from "../LoadingSpin/LoadingSpin";
 import { toast } from "react-toastify";
 import { Tooltip } from "react-tooltip";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { useProvideMode } from "../../../hooks/useProvideMode";
 const defaultPhotoURL =
   "https://www.pngkey.com/png/full/73-730477_first-name-profile-image-placeholder-png.png";
 export function NavBar() {
@@ -12,6 +14,7 @@ export function NavBar() {
     loading,
     firebaseAuth: { user, logOut },
   } = useProvideAuth();
+  const { toggle, setToggle } = useProvideMode();
   const displayName =
     user?.displayName || user?.user?.displayName || "Not Found";
   const photoURL = user?.photoURL || user?.user?.photoURL || defaultPhotoURL;
@@ -20,7 +23,7 @@ export function NavBar() {
     toast.success("Successfully Logout !😀");
   }
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 dark:bg-black">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -69,7 +72,7 @@ export function NavBar() {
         </Link>
       </div>
       <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 dark:text-white">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -86,7 +89,15 @@ export function NavBar() {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end space-x-2">
+        <div
+          onClick={() => {
+            setToggle();
+          }}
+          className="text-3xl cursor-pointer dark:text-white"
+        >
+          {toggle ? <MdLightMode /> : <MdDarkMode />}
+        </div>
         <div className="dropdown dropdown-end hiddenLogoutBtnParent">
           <div
             tabIndex={0}
@@ -122,13 +133,13 @@ export function NavBar() {
           ) : null}
         </div>
         {/* My Profile */}
-        <div className="dropdown dropdown-end ml-3">
+        <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-outline">
-            <button>My Profile ⬇</button>
+            <button className="dark:text-white">My Profile ⬇</button>
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 dark:text-white dark:bg-black"
           >
             <li>
               <Link to="/add-volunteer" className="justify-between">
