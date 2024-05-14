@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import { FormGroup } from "../../components/FormGroup/FormGroup";
 import { Helmet } from "react-helmet";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
 import { toast } from "react-toastify";
 import axios from "axios";
 export function Login() {
+  const location = useLocation().state || "/";
+  const navigate = useNavigate();
   const {
     firebaseAuth: { loginWithEmailAndPassword, setUser, loginWithGoogle },
   } = useProvideAuth();
@@ -29,11 +31,11 @@ export function Login() {
             },
             { withCredentials: true }
           )
-          .then((postSuccces) => {
-            console.log(postSuccces);
+          .then(() => {
             toast.success("Successfully loggedIn 😀");
             setUser(res);
             reset();
+            navigate(location);
           });
       })
       .catch(() => {
@@ -51,10 +53,10 @@ export function Login() {
             },
             { withCredentials: true }
           )
-          .then((postSuccces) => {
-            console.log(postSuccces);
+          .then(() => {
             toast.success("Successfully loggedIn 😀");
             setUser(res);
+            navigate(location);
           });
       })
       .catch(() => {
@@ -137,7 +139,9 @@ export function Login() {
               />
             </label>
           </FormGroup>
-          <button className="btn btn-outline w-full sm:w-auto dark:text-white">Login</button>
+          <button className="btn btn-outline w-full sm:w-auto dark:text-white">
+            Login
+          </button>
         </form>
         <div className="mt-3">
           <div className="flex justify-between">

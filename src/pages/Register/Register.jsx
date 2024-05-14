@@ -1,12 +1,14 @@
 import { Helmet } from "react-helmet";
 import { FormGroup } from "../../components/FormGroup/FormGroup";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
 import { toast } from "react-toastify";
 
 export function Register() {
+  const location = useLocation().state || "/";
+  const navigate = useNavigate();
   const {
     firebaseAuth: {
       signUpWithEmailAndPassword,
@@ -39,6 +41,7 @@ export function Register() {
               toast.success("Successfully Registered 😀");
               setUser(finalRes);
               reset();
+              navigate(location);
             });
         });
       })
@@ -61,6 +64,7 @@ export function Register() {
           .then(() => {
             toast.success("Successfully loggedIn 😀");
             setUser(res);
+            navigate(location);
           });
       })
       .catch(() => {});
@@ -178,7 +182,9 @@ export function Register() {
               />
             </label>
           </FormGroup>
-          <button className="btn btn-outline w-full sm:w-auto dark:text-white">Register</button>
+          <button className="btn btn-outline w-full sm:w-auto dark:text-white">
+            Register
+          </button>
         </form>
         <div className="mt-3">
           <div className="flex justify-between">

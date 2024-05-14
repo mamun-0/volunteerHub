@@ -57,9 +57,11 @@ export function NavBar() {
                 <Link to="/login">Login</Link>
               </li>
             )}
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
+            {loading ? null : user ? null : (
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -84,9 +86,11 @@ export function NavBar() {
               <Link to="/login">Login</Link>
             </li>
           )}
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
+          {loading ? null : user ? null : (
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end space-x-2">
