@@ -1,8 +1,14 @@
-# React + Vite
+# VolunteerHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Link
+<!-- `link` -->
 
-Currently, two official plugins are available:
+## Five(+) Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User could browse various routes except protected routes.
+- Firebase Authentication
+- JWT for Authorization
+- A registered user can Update, Delete & Add volunteer related post.
+- Tabular & Grid View of all neeeded volunteers post.
+- Ability to preserve user login info.
+- Unauthorized couldn't access other's post.
