@@ -157,7 +157,7 @@ export function Login() {
               onClick={() => {
                 socialLogin(loginWithGoogle);
               }}
-              className="btn text-gray-200 btn-error"
+              className="btn text-gray-200 btn-error w-full flex"
             >
               <FaGoogle />
               Google
