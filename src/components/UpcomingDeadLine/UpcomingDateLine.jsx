@@ -10,7 +10,7 @@ export function UpcomingDateLine({
   const originalDate = new Date(date);
   const formattedDate = originalDate.toLocaleDateString("en-GB");
   return (
-    <div className="place-self-center">
+    <div className="place-self-center hover:scale-95 transition-all">
       <div className="w-full">
         <img
           className="h-40 w-full object-cover"
