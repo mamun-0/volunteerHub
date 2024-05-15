@@ -23,18 +23,25 @@ export function VolunteerList() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (volunteer === null) {
+      setFiltered([]);
+      return;
+    }
+    const filteredVolunteer = volunteer.filter((item) => {
+      return item.post_title.toLowerCase().includes(text.toLowerCase());
+    });
+    setFiltered(filteredVolunteer);
+  }, [text]);
   function handleChange(event) {
     setText(event.target.value);
-    const filteredVolunteer = filterVolunteer(volunteer, event.target.value);
-    setFiltered(filteredVolunteer);
   }
-  function filterVolunteer(arr, searchText) {
-    if (arr === null) return [];
-    return arr.filter((item) => {
-      return item.post_title.toLowerCase().includes(searchText.toLowerCase());
-    });
-  }
-
+  const EmptyListMsg = (
+    <h2 className="text-2xl text-center text-red-500 font-semibold my-3">
+      Empty List
+    </h2>
+  );
   return (
     <>
       <div className="text-center dark:bg-black">
@@ -77,38 +84,26 @@ export function VolunteerList() {
             : ""
         } py-4 dark:bg-black`}
       >
-        {/* {loading ? (
-          <LoadingSpin />
-        ) : toggle && filterd.length ? (
-          filterd.map((person, idx) => {
-            return <VolunteerCard key={idx} {...person} />;
-          })
-        ) : volunteer && toggle ? (
-          volunteer.map((person, idx) => {
-            return <VolunteerCard key={idx} {...person} />;
-          })
-        ) : volunteer && !toggle ? (
-          <VolunteerCardTable myPosts={volunteer} />
-        ) : (
-          "Empty List"
-        )} */}
         {loading ? (
           <LoadingSpin />
-        ) : toggle && filterd.length ? (
-          filterd.map((person, idx) => {
-            return <VolunteerCard key={idx} {...person} />;
-          })
-        ) : !toggle && filterd.length ? (
-          // Here is the problem next time i try to fix it😿.
-          <VolunteerCardTable myPosts={volunteer} />
-        ) : volunteer && toggle ? (
-          volunteer.map((person, idx) => {
-            return <VolunteerCard key={idx} {...person} />;
-          })
-        ) : volunteer && !toggle ? (
-          <VolunteerCardTable myPosts={volunteer} />
+        ) : filterd.length ? (
+          toggle ? (
+            filterd.map((myPosts, idx) => {
+              return <VolunteerCard key={idx} {...myPosts} />;
+            })
+          ) : (
+            <VolunteerCardTable myPosts={filterd} />
+          )
+        ) : volunteer ? (
+          toggle ? (
+            volunteer.map((myPosts, idx) => {
+              return <VolunteerCard key={idx} {...myPosts} />;
+            })
+          ) : (
+            <VolunteerCardTable myPosts={volunteer} />
+          )
         ) : (
-          "Empty List"
+          EmptyListMsg
         )}
       </div>
     </>
