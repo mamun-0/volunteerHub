@@ -23,7 +23,7 @@ export function NavBar() {
     toast.success("Successfully Logout !😀");
   }
   return (
-    <div className="navbar bg-base-100 dark:bg-black">
+    <div className="navbar bg-base-200 dark:bg-black">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -113,7 +113,7 @@ export function NavBar() {
                 <LoadingSpin />
               ) : (
                 <>
-                  <img alt="Profile" src={photoURL} />
+                  <img alt="Profile" src={photoURL} className="rotate" />
                   <Tooltip
                     // Don't forget the `#`!
                     anchorSelect="#my-anchor-element-id"
@@ -152,9 +152,6 @@ export function NavBar() {
             </li>
             <li>
               <Link to={"/manage-post"}>Manage My Post</Link>
-            </li>
-            <li>
-              <a>Volunteer Request</a>
             </li>
           </ul>
         </div>
