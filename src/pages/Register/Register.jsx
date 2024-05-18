@@ -5,6 +5,7 @@ import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export function Register() {
   const location = useLocation().state || "/";
@@ -39,7 +40,7 @@ export function Register() {
             )
             .then(() => {
               toast.success("Successfully Registered 😀");
-              setUser(finalRes);
+              setUser(res);
               reset();
               navigate(location);
             });

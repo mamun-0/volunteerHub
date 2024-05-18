@@ -25,7 +25,6 @@ export function AddVolunteerForm() {
   });
 
   function onSubmit(data) {
-    console.log(data);
     axios
       .post(
         `${import.meta.env.VITE_BASE_URL}/add-volunteer`,
