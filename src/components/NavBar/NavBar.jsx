@@ -113,7 +113,7 @@ export function NavBar() {
                 <LoadingSpin />
               ) : (
                 <>
-                  <img alt="Profile" src={photoURL} className="rotate" />
+                  <img alt="Profile" src={photoURL} />
                   <Tooltip
                     // Don't forget the `#`!
                     anchorSelect="#my-anchor-element-id"
