@@ -3,12 +3,12 @@ import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
 import { useLoading } from "../hooks/useLoading";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { useAxiosSecure } from "../Axios/useAxiosSecure";
+import { useAxiosCommon } from "../Axios/useAxiosCommon";
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const firebaseAuth = useFirebaseAuth(null);
-  const secure = useAxiosSecure();
+  const common = useAxiosCommon();
   const [loading, setLoading] = useLoading(true);
   useEffect(() => {
     const { setUser } = firebaseAuth;
@@ -16,9 +16,8 @@ export function AuthProvider({ children }) {
       setUser(currentUser);
       if (currentUser) {
         setUser(currentUser);
-        secure.post("/jwt", { email: currentUser.email }).then((res) => {
+        common.post("/jwt", { email: currentUser.email }).then((res) => {
           const { token } = res.data;
-          console.log(currentUser);
           if (token) {
             window.localStorage.setItem("access-token", token);
           } else {
