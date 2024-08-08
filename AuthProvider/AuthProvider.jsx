@@ -10,25 +10,33 @@ export function AuthProvider({ children }) {
   const firebaseAuth = useFirebaseAuth(null);
   const common = useAxiosCommon();
   const [loading, setLoading] = useLoading(true);
+  
   useEffect(() => {
     const { setUser } = firebaseAuth;
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        setUser(currentUser);
-        common.post("/jwt", { email: currentUser.email }).then((res) => {
+        try {
+          const res = await common.post("/jwt", { email: currentUser.email });
           const { token } = res.data;
           if (token) {
             window.localStorage.setItem("access-token", token);
           } else {
             window.localStorage.removeItem("access-token");
           }
-        });
+        } catch (error) {
+          console.error("Failed to retrieve token:", error);
+          window.localStorage.removeItem("access-token");
+        }
+      } else {
+        window.localStorage.removeItem("access-token");
       }
       setLoading(false);
     });
+
     return () => unsubscribe();
   }, []);
+
   return (
     <AuthContext.Provider
       value={{
