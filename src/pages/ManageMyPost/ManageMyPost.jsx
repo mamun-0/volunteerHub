@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { SectionTitle } from "../../components/SectionTitle/SectionTitle";
-import axios from "axios";
 import { MyVolunteerPostList } from "../../components/MyVolunteerPostList/MyVolunteerPostList";
 import { BeAVolunteerPostList } from "../../components/BeAVolunteerPostList/BeAVolunteerPostList";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 import { Helmet } from "react-helmet";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 
 export function ManageMyPost() {
   const [myPosts, setMyPosts] = useState([]);
   const [beAVolunteer, setBeAVolunteer] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(true);
+  const secure = useAxiosSecure();
   useState(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/myposts`, {
-        withCredentials: true,
-      })
+    secure
+      .get(`${import.meta.env.VITE_BASE_URL}/myposts`)
       .then(({ data }) => {
         setMyPosts(data.message);
       })
@@ -24,10 +23,8 @@ export function ManageMyPost() {
         setLoading(false);
       });
 
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/request-voluenteer`, {
-        withCredentials: true,
-      })
+    secure
+      .get(`${import.meta.env.VITE_BASE_URL}/request-voluenteer`)
       .then(({ data }) => {
         setBeAVolunteer(data.message);
       })
@@ -37,7 +34,9 @@ export function ManageMyPost() {
       });
   }, []);
   const EmptyListMsg = (
-    <h2 className="text-2xl text-center text-red-500 font-semibold my-3">Empty List</h2>
+    <h2 className="text-2xl text-center text-red-500 font-semibold my-3">
+      Empty List
+    </h2>
   );
   return (
     <div>

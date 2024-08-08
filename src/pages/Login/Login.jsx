@@ -5,8 +5,9 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { useAxiosCommon } from "../../../Axios/useAxiosCommon";
 export function Login() {
+  const common = useAxiosCommon();
   const location = useLocation().state || "/";
   const navigate = useNavigate();
   const {
@@ -23,14 +24,10 @@ export function Login() {
     const { email, password } = data;
     loginWithEmailAndPassword(email, password)
       .then((res) => {
-        axios
-          .post(
-            `${import.meta.env.VITE_BASE_URL}/jwt`,
-            {
-              email: res?.user?.email,
-            },
-            { withCredentials: true }
-          )
+        common
+          .post(`${import.meta.env.VITE_BASE_URL}/jwt`, {
+            email: res?.user?.email,
+          })
           .then(() => {
             toast.success("Successfully loggedIn 😀");
             setUser(res);
@@ -45,14 +42,10 @@ export function Login() {
   function socialLogin(callback) {
     callback()
       .then((res) => {
-        axios
-          .post(
-            `${import.meta.env.VITE_BASE_URL}/jwt`,
-            {
-              email: res?.user?.email,
-            },
-            { withCredentials: true }
-          )
+        common
+          .post(`${import.meta.env.VITE_BASE_URL}/jwt`, {
+            email: res?.user?.email,
+          })
           .then(() => {
             toast.success("Successfully loggedIn 😀");
             setUser(res);

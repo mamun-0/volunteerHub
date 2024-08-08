@@ -2,9 +2,9 @@ import { useForm, Controller } from "react-hook-form";
 import { FormGroup } from "../FormGroup/FormGroup";
 import DatePicker from "react-datepicker";
 import { parseISO } from "date-fns";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 export function BeAVolunteerForm({
   category,
   description,
@@ -19,6 +19,7 @@ export function BeAVolunteerForm({
   volunteer_Email,
   _id,
 }) {
+  const secure = useAxiosSecure();
   const navigate = useNavigate();
   const {
     register,
@@ -41,14 +42,10 @@ export function BeAVolunteerForm({
     },
   });
   function onSubmit(data) {
-    axios
-      .post(
-        `${import.meta.env.VITE_BASE_URL}/be-a-volunteer/${_id}`,
-        { ...data },
-        {
-          withCredentials: true,
-        }
-      )
+    secure
+      .post(`${import.meta.env.VITE_BASE_URL}/be-a-volunteer/${_id}`, {
+        ...data,
+      })
       .then(({ data }) => {
         toast.success(data.message);
         navigate(`/need-volunteer/${_id}`, { replace: true });

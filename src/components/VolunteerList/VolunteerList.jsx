@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { VolunteerCard } from "../VolunteerCard/VolunteerCard";
-import axios from "axios";
 import { LoadingSpin } from "../LoadingSpin/LoadingSpin";
 import { IoGridOutline } from "react-icons/io5";
 import { BsViewStacked } from "react-icons/bs";
 import { useToggle } from "../../../hooks/useToggle";
 import { VolunteerCardTable } from "../VolunteerCardTable/VolunteerCardTable";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 
 export function VolunteerList() {
   const [volunteer, setVolunteer] = useState(null);
@@ -13,11 +13,10 @@ export function VolunteerList() {
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState("");
   const [toggle, setToggle] = useToggle(true);
+  const secure = useAxiosSecure();
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/need-volunteer`, {
-        withCredentials: true,
-      })
+    secure
+      .get(`${import.meta.env.VITE_BASE_URL}/need-volunteer`)
       .then(({ data }) => {
         setVolunteer(data.message);
         setLoading(false);

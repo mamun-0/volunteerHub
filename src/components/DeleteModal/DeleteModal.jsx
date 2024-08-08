@@ -1,18 +1,15 @@
-import axios from "axios";
 import { toast } from "react-toastify";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 
 export function DeleteModal({ id, setMyPosts }) {
+  const secure = useAxiosSecure();
   function deletePost(id) {
-    axios
-      .delete(`${import.meta.env.VITE_BASE_URL}/myposts/${id}`, {
-        withCredentials: true,
-      })
+    secure
+      .delete(`${import.meta.env.VITE_BASE_URL}/myposts/${id}`)
       .then(({ data }) => {
         toast.success(data.message);
-        axios
-          .get(`${import.meta.env.VITE_BASE_URL}/myposts`, {
-            withCredentials: true,
-          })
+        secure
+          .get(`${import.meta.env.VITE_BASE_URL}/myposts`)
           .then(({ data }) => {
             setMyPosts(data.message);
           });

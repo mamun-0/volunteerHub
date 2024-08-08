@@ -1,18 +1,15 @@
-import axios from "axios";
 import { toast } from "react-toastify";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 
 export function CancelModal({ id, setBeAVolunteer }) {
+  const secure = useAxiosSecure();
   function deletePost(id) {
-    axios
-      .delete(`${import.meta.env.VITE_BASE_URL}/request-voluenteer/${id}`, {
-        withCredentials: true,
-      })
+    secure
+      .delete(`${import.meta.env.VITE_BASE_URL}/request-voluenteer/${id}`)
       .then(({ data }) => {
         toast.success(data.message);
-        axios
-          .get(`${import.meta.env.VITE_BASE_URL}/request-voluenteer`, {
-            withCredentials: true,
-          })
+        secure
+          .get(`${import.meta.env.VITE_BASE_URL}/request-voluenteer`)
           .then(({ data }) => {
             setBeAVolunteer(data.message);
           });

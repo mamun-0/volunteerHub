@@ -6,7 +6,9 @@ import { useLoaderData } from "react-router-dom";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
 import { Helmet } from "react-helmet";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 export function BeAVolunteer() {
+  const secure = useAxiosSecure();
   const {
     firebaseAuth: { user },
   } = useProvideAuth();
@@ -19,10 +21,8 @@ export function BeAVolunteer() {
   const volunteer_Email = user?.email || user?.user?.email || "Not found";
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/be-a-volunteer/${id}`, {
-        withCredentials: true,
-      })
+    secure
+      .get(`${import.meta.env.VITE_BASE_URL}/be-a-volunteer/${id}`)
       .then(({ data }) => {
         setBeAVolunteer(data.message);
       })

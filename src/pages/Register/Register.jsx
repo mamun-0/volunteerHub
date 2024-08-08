@@ -5,9 +5,10 @@ import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { useAxiosCommon } from "../../../Axios/useAxiosCommon";
 
 export function Register() {
+  const common = useAxiosCommon();
   const location = useLocation().state || "/";
   const navigate = useNavigate();
   const {
@@ -30,14 +31,10 @@ export function Register() {
     signUpWithEmailAndPassword(email, password)
       .then((res) => {
         updateUserProfile(displayName, photoURL).then((finalRes) => {
-          axios
-            .post(
-              `${import.meta.env.VITE_BASE_URL}/jwt`,
-              {
-                email: res?.user?.email,
-              },
-              { withCredentials: true }
-            )
+          common
+            .post(`${import.meta.env.VITE_BASE_URL}/jwt`, {
+              email: res?.user?.email,
+            })
             .then(() => {
               toast.success("Successfully Registered 😀");
               setUser(res);
@@ -54,14 +51,10 @@ export function Register() {
   function socialLogin(callback) {
     callback()
       .then((res) => {
-        axios
-          .post(
-            `${import.meta.env.VITE_BASE_URL}/jwt`,
-            {
-              email: res?.user?.email,
-            },
-            { withCredentials: true }
-          )
+        common
+          .post(`${import.meta.env.VITE_BASE_URL}/jwt`, {
+            email: res?.user?.email,
+          })
           .then(() => {
             toast.success("Successfully loggedIn 😀");
             setUser(res);

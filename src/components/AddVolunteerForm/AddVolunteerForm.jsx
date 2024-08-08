@@ -4,10 +4,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./AddVolunteerForm.css";
 import { useProvideAuth } from "../../../hooks/useProvideAuth";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 
 export function AddVolunteerForm() {
+  const secure = useAxiosSecure();
   const {
     firebaseAuth: { user },
   } = useProvideAuth();
@@ -25,14 +26,10 @@ export function AddVolunteerForm() {
   });
 
   function onSubmit(data) {
-    axios
-      .post(
-        `${import.meta.env.VITE_BASE_URL}/add-volunteer`,
-        {
-          ...data,
-        },
-        { withCredentials: true }
-      )
+    secure
+      .post(`${import.meta.env.VITE_BASE_URL}/add-volunteer`, {
+        ...data,
+      })
       .then((res) => {
         toast.success(res?.data?.message);
         reset();

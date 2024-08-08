@@ -33,9 +33,7 @@ export function useFirebaseAuth(initialUser = null) {
     return signInWithPopup(auth, provider);
   }
   function logOut() {
-    axios.get(`${import.meta.env.VITE_BASE_URL}/logout`, {
-      withCredentials: true,
-    });
+    window.localStorage.removeItem("access-token"); 
     return signOut(auth);
   }
   return {

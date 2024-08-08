@@ -1,21 +1,20 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { LoadingSpin } from "../../components/LoadingSpin/LoadingSpin";
 import { VolunteerDetailsCard } from "../../components/VolunteerDetailsCard/VolunteerDetailsCard";
 import { SectionTitle } from "../../components/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 
 export function VolunteerDetails() {
+  const secure = useAxiosSecure();
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const id = useLoaderData();
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/need-volunteer/${id}`, {
-        withCredentials: true,
-      })
+    secure
+      .get(`${import.meta.env.VITE_BASE_URL}/need-volunteer/${id}`)
       .then(({ data }) => {
         setDetails(data.message);
         setLoading(false);

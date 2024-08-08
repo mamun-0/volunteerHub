@@ -2,9 +2,9 @@ import { useForm, Controller } from "react-hook-form";
 import { FormGroup } from "../FormGroup/FormGroup";
 import DatePicker from "react-datepicker";
 import { parseISO } from "date-fns";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAxiosSecure } from "../../../Axios/useAxiosSecure";
 export function UpdateMyPostForm({
   category,
   description,
@@ -17,6 +17,7 @@ export function UpdateMyPostForm({
   date,
   _id,
 }) {
+  const secure = useAxiosSecure();
   const navigate = useNavigate();
   const {
     register,
@@ -37,14 +38,8 @@ export function UpdateMyPostForm({
     },
   });
   function onSubmit(data) {
-    axios
-      .put(
-        `${import.meta.env.VITE_BASE_URL}/myposts/${_id}`,
-        { ...data },
-        {
-          withCredentials: true,
-        }
-      )
+    secure
+      .put(`${import.meta.env.VITE_BASE_URL}/myposts/${_id}`, { ...data })
       .then(({ data }) => {
         toast.success(data.message);
         navigate(`/manage-post`, { replace: true });
